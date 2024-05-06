@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backgroundSecond"
+        tools:background="@color/black"
+        android:layout_width="match_parent"
+        android:clipChildren="false"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appLayout"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                app:civ_border_width="0dp"
+                android:id="@+id/appLogo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/light_white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/appLogo"
+                app:layout_constraintStart_toEndOf="@+id/appLogo"
+                app:layout_constraintTop_toTopOf="@+id/appLogo"
+                tools:text="TELETELEgrammmTELETELEgramm" />
+
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/light_white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/appTitle"
+                app:layout_constraintStart_toEndOf="@+id/appTitle"
+                app:layout_constraintTop_toTopOf="@+id/appTitle"
+                tools:text="11:34" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="26dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="22dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:singleLine="true"
+            android:textColor="@color/light_white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appLayout"
+            tools:text="AnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoli" />
+
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="22dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="5"
+            android:textColor="@color/light_white"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="AnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoliAnotoli" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutReply"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="18dp"
+            tools:visibility="visible"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="14dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text"
+            app:layout_constraintVertical_bias="0.0">
+
+            <LinearLayout
+                tools:visibility="visible"
+                android:id="@+id/replyBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/shape_reply"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/send"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:textCursorDrawable="@drawable/shape_cursor"
+                    android:id="@+id/replyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:background="@null"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="@string/reply"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:textColor="@color/light_white"
+                    android:textColorHint="@color/grey_2"
+                    android:textSize="11sp"
+                    tools:text="Hello My Name Hello My Name Hello My Name Hello My Name Hello My Name Hello My Name" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/send"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:src="@drawable/ic_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDefault"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="22dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/layoutActions"
+                android:layout_width="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                tools:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="11dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/index"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="?colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1/5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,15 @@
+Dynamic Island in your phone like IOS Iphone
+
+Features:
+- Quick action (screenshot, lock screen, flashlight, open camera, open settings)
+- Battery charging notifications
+- Battery low notifications
+- Sound mode change notificaiton
+- Headphones bluetooth connect notifications
+- Music player
+- Sound visualizer
+- Incoming calls
+- Outgoing calls
+- Push notification from other apps
+- Timer
+- Two popus for multitasking

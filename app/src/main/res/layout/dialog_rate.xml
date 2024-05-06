@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="vm"
+            type="com.dynamic.island.oasis.ui.dialogs.rate.RateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/root"
+        android:clickable="true"
+        android:background="@drawable/shape_light_pink_28"
+        android:focusable="true"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/MyTextWorkSans20"
+            android:textColor="@color/purple_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/how_would_you_rate_n_dynamic_oasis"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.willy.ratingbar.ScaleRatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:srb_rating="5"
+            app:srb_numStars="5"
+            app:srb_minimumStars="1"
+            app:srb_stepSize="1"
+            app:srb_starWidth="32dp"
+            app:srb_starHeight="30dp"
+            app:srb_starPadding="9dp"
+            app:srb_clickable="true"
+            app:srb_scrollable="false"
+            app:srb_drawableEmpty="@drawable/ic_rating_empty"
+            app:srb_drawableFilled="@drawable/ic_rating_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/cancel"
+            style="@style/MyTextRobotoM14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:padding="8dp"
+            android:layout_marginBottom="17dp"
+            android:text="@string/cancel"
+            android:textColor="@color/purple_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rating"
+            app:layout_constraintTop_toBottomOf="@id/rating" />
+        <TextView
+            android:id="@+id/rate"
+            style="@style/MyTextRobotoM14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:padding="8dp"
+            android:layout_marginBottom="17dp"
+            android:text="@string/rate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rating"
+            app:layout_constraintTop_toBottomOf="@id/rating" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

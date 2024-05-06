@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="di_corners_4">30dp</dimen>
+    <dimen name="di_corners_2">10dp</dimen>
+
+    <dimen name="di_max_height">80dp</dimen>
+    <dimen name="di_min_height">40dp</dimen>
+    <dimen name="di_max_width">250dp</dimen>
+    <dimen name="di_min_width">100dp</dimen>
+
+    <dimen name="di_default_padding">10dp</dimen>
+    <dimen name="di_animation_padding">20dp</dimen>
+    <dimen name="di_alert_padding">63dp</dimen>
+
+    <dimen name="di_bubble_margin">8dp</dimen>
+
+    <dimen name="notif_action_margin_right">16dp</dimen>
+    <dimen name="music_padding">14dp</dimen>
+    <dimen name="music_padding_progress">28dp</dimen>
+
+    <dimen name="onboarding_margin_top">30dp</dimen>
+    <dimen name="onboarding_expanded_width">300dp</dimen>
+    <dimen name="onboarding_collapsed_width">181dp</dimen>
+    <dimen name="pager_indicator_size">11dp</dimen>
+    <dimen name="margin_left_right_home">22dp</dimen>
+
+
+    <dimen name="margin_left_right_info">27dp</dimen>
+    <dimen name="margin_top_bottom">22dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="dp22">22dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="dp18">18dp</dimen>
+    <dimen name="dpN11">-11dp</dimen>
+
+    <dimen name="splash_logo">100dp</dimen>
+</resources>

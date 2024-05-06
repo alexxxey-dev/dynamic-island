@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/di_default_padding"
+        android:paddingEnd="@dimen/di_default_padding"
+        android:paddingBottom="@dimen/di_animation_padding">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:clipChildren="false"
+            android:layout_height="match_parent"
+            tools:background="@android:color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:clipChildren="false"
+                android:layout_height="match_parent"
+                tools:paddingBottom="@dimen/music_padding"
+                android:id="@+id/backgroundSecond">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    app:civ_border_width="0dp"
+                    android:id="@+id/appLogoNothing"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginEnd="22dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/close"
+                    tools:src="@mipmap/ic_launcher" />
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    app:civ_border_width="0dp"
+                    android:id="@+id/appLogoProgress"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    tools:visibility="gone"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="22dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/close"
+                    tools:src="@mipmap/ic_launcher" />
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="22dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/metadata"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginEnd="7dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/close"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        app:civ_border_width="0dp"
+                        android:id="@+id/logo"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="centerCrop"
+                        tools:src="@mipmap/ic_launcher" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            tools:text="Pussy money weed weed weed weed weed weed weed" />
+
+                        <TextView
+                            android:id="@+id/artist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+
+                            android:singleLine="true"
+                            android:textSize="12sp"
+                            tools:text="Tommy Mommy Tommy Mommy Tommy Mommy Tommy Mommy Tommy Mommy " />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutProgress"
+                    android:layout_width="0dp"
+                    tools:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="22dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/metadata">
+
+                    <TextView
+
+                        android:id="@+id/passedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/totalTime"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/totalTime"
+                        tools:text="1:54" />
+
+                    <SeekBar
+                        android:id="@+id/progress"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:progressDrawable="@drawable/music_seekbar"
+                        android:splitTrack="false"
+                        android:thumbTint="@android:color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/totalTime"
+                        app:layout_constraintStart_toEndOf="@+id/passedTime"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:progress="50" />
+
+                    <TextView
+
+                        android:id="@+id/totalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="2:54" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutControls"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:visibility="gone"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutProgress">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        app:civ_border_width="0dp"
+                        android:id="@+id/appLogoControls"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="22dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@mipmap/ic_launcher" />
+
+                    <ImageView
+                        android:id="@+id/prev"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15.6dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_prev"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout"
+                        android:layout_width="18.3dp"
+                        android:layout_height="23.3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/playPause"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+                        app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
+                        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+                        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
+                        app:lottie_autoPlay="false"
+                        app:lottie_loop="false"
+                        app:lottie_rawRes="@raw/pause_to_play" />
+
+                    <ImageView
+                        android:id="@+id/next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15.6dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_next"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.dynamic.island.oasis.ui.paywall.PaywallViewModel" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{()->vm.onSubscriptionClicked(pos)}"
+        android:id="@+id/rootLayout">
+
+
+        <eightbitlab.com.blurview.BlurView
+            android:background="@drawable/shape_rounded_19"
+            android:id="@+id/blur"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/productLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() &amp;&amp; vm.selectedSubscription.id.equals(vm.allSubscriptions.get(pos).id) ? @drawable/bg_feature_selected : @drawable/bg_feature_unselected}"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/bg_feature_selected">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    style="@style/MyTextWorkSans20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() ? vm.allSubscriptions.get(pos).numberTitle : @string/empty}"
+                    android:textColor="@color/dark_purple_4"
+                    app:layout_constraintBottom_toTopOf="@+id/textView20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1\nMonth" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    style="@style/MyTextRobotoSB12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() &amp;&amp; vm.allSubscriptions.get(pos).isTrial == false ?  vm.allSubscriptions.get(pos).priceText : @string/trial_description}"
+                    android:textColor="@color/dark_purple_4"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="7-Day Free Trial" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    style="@style/MyTextRobotoM14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() &amp;&amp; vm.allSubscriptions.get(pos).isTrial ? vm.allSubscriptions.get(pos).shortDescription : @string/cancel_anytime_auto_renewal}"
+                    android:textColor="@color/dark_purple_5"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20"
+                    tools:text="Then 12.88 USD per year" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </eightbitlab.com.blurview.BlurView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
+
+
+

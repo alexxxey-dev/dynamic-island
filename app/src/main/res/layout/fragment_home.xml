@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.dynamic.island.oasis.ui.home.HomeViewModel" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:background="@color/white_pink"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bg_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                style="@style/MyButtonInverted"
+                android:layout_width="173dp"
+                android:textColor="@color/dark_purple"
+                android:fontFamily="@font/work_sans_bold"
+                android:textSize="20sp"
+                android:layout_height="47dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="0dp"
+                android:onClick="@{vm::onStartStop}"
+                tools:text="Stop"
+                android:visibility="@{vm.diEnabled ? View.VISIBLE : View.GONE}"
+                android:text="@{@string/stop}"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                style="@style/MyButtonBig"
+                android:layout_width="173dp"
+                android:layout_height="47dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="0dp"
+                android:onClick="@{vm::onStartStop}"
+                tools:text="Start"
+                android:visibility="@{vm.diEnabled ? View.GONE : View.VISIBLE}"
+                android:text="@{@string/start}"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-25dp"
+                android:background="@drawable/shape_bg_home"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                app:layout_constraintVertical_bias="1.0">
+
+                
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:visibility="@{vm.subscription ? View.GONE : View.VISIBLE}"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/MyTextRobotoM14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:layout_marginTop="@dimen/margin_top_bottom"
+                        android:layout_marginBottom="@dimen/margin_top_bottom"
+                        android:text="@string/remove_ads"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.dynamic.island.oasis.ui.animated_switch.AnimatedSwitch
+                        android:layout_width="42dp"
+                        android:layout_marginEnd="@dimen/margin_left_right_home"
+                        app:checked="@{vm.subscription}"
+                        android:onClickListener="@{vm::onSubscriptionClicked}"
+                        android:layout_height="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{vm.subscription ? View.GONE : View.VISIBLE}"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_4"/>
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/MyTextRobotoM14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:layout_marginTop="19dp"
+                        android:text="@string/select_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/relativeLayout3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="18dp"
+                        android:onClick="@{(v)->vm.setBackgroundNotch(v,false)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                        <ImageView
+                            android:id="@+id/imageView18"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_selector"
+                            android:visibility="@{vm.diNotch ? View.INVISIBLE : View.VISIBLE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_di_rounded"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView18"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/center"
+                        app:layout_constraintGuide_percent="0.5"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/relativeLayout4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="18dp"
+                        android:onClick="@{(v)->vm.setBackgroundNotch(v,true)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/center"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                        <ImageView
+                            android:id="@+id/imageView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_selector"
+                            android:visibility="@{vm.diNotch ? View.VISIBLE : View.INVISIBLE}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_di_notch"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_4"/>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:clipChildren="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="22dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            style="@style/MyTextRobotoM14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/horizontal_position"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/reset"
+
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent">
+                            <TextView
+                                android:id="@+id/textView55"
+                                style="@style/MyTextRobotoM14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="5dp"
+                                android:text="@string/reset"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                            
+                            <ImageView
+                                android:layout_marginTop="1.5dp"
+                                android:layout_width="10dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_reset"/>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <SeekBar
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        app:onProgressChanged="@{vm.updateX}"
+                        android:progress="@{vm.diX}"
+                        style="@style/PurpleSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        style="@style/MyTextRobotoM14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:text="@string/vertical_position" />
+
+
+                    <SeekBar
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        app:onProgressChanged="@{vm.updateY}"
+                        android:progress="@{vm.diY}"
+                        style="@style/PurpleSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp" />
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        style="@style/MyTextRobotoM14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:text="@string/width" />
+
+
+                    <SeekBar
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        app:onStopTracking="@{vm.updateWidth}"
+                        android:progress="@{vm.diWidth}"
+                        style="@style/PinkSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        style="@style/MyTextRobotoM14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_left_right_home"
+                        android:text="@string/height" />
+
+
+                    <SeekBar
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        app:onStopTracking="@{vm.updateHeight}"
+                        android:progress="@{vm.diHeight}"
+                        style="@style/PinkSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp" />
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

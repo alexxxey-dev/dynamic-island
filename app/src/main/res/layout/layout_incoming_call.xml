@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:paddingStart="@dimen/di_default_padding"
+        android:paddingEnd="@dimen/di_default_padding"
+        android:paddingBottom="@dimen/di_animation_padding"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:id="@+id/background">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/backgroundSecond"
+                android:paddingTop="17dp"
+                android:clipChildren="false"
+                android:paddingBottom="18dp"
+                tools:background="@drawable/shape_di_rounded"
+                tools:backgroundTint="@color/black"
+                android:paddingStart="22dp">
+
+                <RelativeLayout
+                    android:layout_width="40dp"
+                    android:id="@+id/layoutPhoto"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="40dp">
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        app:civ_border_width="0dp"
+                        android:id="@+id/photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        tools:src="@mipmap/ic_launcher" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/fakePhoto"
+
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_call_photo">
+
+                        <TextView
+                            android:id="@+id/fakePhotoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/purple"
+                            android:textSize="16sp"
+                            tools:text="A" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="7dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutActions"
+                    app:layout_constraintStart_toEndOf="@+id/layoutPhoto"
+                    app:layout_constraintTop_toTopOf="@+id/layoutPhoto">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="AntoniAntoniAntoniAntoniAntoniAntoniAntoniAntoni" />
+
+                    <TextView
+                        android:layout_marginTop="-2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_small"
+                        android:text="@string/incoming_call"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layoutActions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:orientation="horizontal"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

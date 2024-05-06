@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "800830521099",
+    "project_id": "dynamicoasis",
+    "storage_bucket": "dynamicoasis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800830521099:android:86240ad5c09ecc9ddf6c0e",
+        "android_client_info": {
+          "package_name": "com.dynamic.island.oasis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6qtkK6AnRAJrOX_h8lEX7n13g3G8SkkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

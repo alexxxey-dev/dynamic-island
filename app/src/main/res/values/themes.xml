@@ -1,0 +1,135 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="ParentTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryVariant">@color/pink</item>
+        <item name="colorAccent">@color/pink</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:statusBarColor">@color/white_pink</item>
+        <item name="android:textColor">@color/light_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="ParentTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+    <style name="Theme.DynamicIsland" parent="ParentTheme">
+        <item name="materialButtonStyle">@style/MyButton</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+
+
+    <style name="MyDialogDim" parent="MyDialog">
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+
+    </style>
+    <style name="MyDialogBlur" parent="MyDialog">
+        <item name="android:windowBlurBehindEnabled" tools:targetApi="s">true</item>
+        <item name="android:windowBlurBehindRadius" tools:targetApi="s">10dp</item>
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="MyTextRobotoSB12" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:fontFamily">@font/roboto_semi_bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="MyTextRobotoM14" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="MyTextRobotoR14" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="MyTextRoboto16" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="MyTextWorkSans20" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/work_sans_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="MyTextBottomNavInactive">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey_3</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+    <style name="MyTextBottomNavActive">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/light_black_1</item>
+        <item name="android:fontFamily">@font/roboto_semi_bold</item>
+    </style>
+
+    <style name="MySeekbar" parent="@android:style/Widget.SeekBar">
+
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:splitTrack">false</item>
+    </style>
+    <style name="PurpleSeekbar" parent="MySeekbar">
+        <item name="android:progressDrawable">@drawable/purple_seekbar</item>
+        <item name="android:thumb">@drawable/purple_seekbar_thumb</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:splitTrack">false</item>
+    </style>
+    <style name="PinkSeekbar" parent="MySeekbar">
+        <item name="android:progressDrawable">@drawable/pink_seekbar</item>
+        <item name="android:thumb">@drawable/pink_seekbar_thumb</item>
+
+    </style>
+    <style name="MyButtonBig" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/shape_button</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="fontFamily">@font/work_sans_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">13dp</item>
+    </style>
+    <style name="MyButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/shape_button</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+    <style name="MyButtonInverted" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/selector_button_inverted</item>
+        <item name="android:textColor">@color/dark_purple</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+</resources>

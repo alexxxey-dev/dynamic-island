@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <action
+        android:id="@+id/action_permissionDialog"
+        app:destination="@id/permissionsDialog" />
+    <action
+        android:id="@+id/action_dialogRate"
+        app:destination="@id/dialogRate" />
+    <action
+        android:id="@+id/action_dialogLock"
+        app:destination="@id/dialogLock" />
+    <action
+        android:id="@+id/action_paywallAFragment"
+        app:enterAnim="@anim/fade_in"
+        app:popEnterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popExitAnim="@anim/fade_out"
+        app:destination="@id/paywallAFragment" />
+    <action
+        android:id="@+id/action_paywallBFragment"
+        app:enterAnim="@anim/fade_in"
+        app:popEnterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popExitAnim="@anim/fade_out"
+        app:destination="@id/paywallBFragment" />
+    <action
+        android:id="@+id/action_paywallCFragment"
+        app:enterAnim="@anim/fade_in"
+        app:popEnterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popExitAnim="@anim/fade_out"
+        app:destination="@id/paywallCFragment" />
+    <action
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"
+        android:id="@+id/action_onboardingFragment"
+        app:destination="@id/onboardingFragment" />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.dynamic.island.oasis.ui.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment" >
+        <action
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_onboardingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_policyDialog"
+            app:destination="@id/policyDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.dynamic.island.oasis.ui.home.HomeFragment"
+        android:label="HomeFragment"/>
+    <fragment
+        android:id="@+id/paywallAFragment"
+        android:name="com.dynamic.island.oasis.ui.paywall.PaywallAFragment"
+        android:label="PaywallAFragment" />
+
+    <fragment
+        android:id="@+id/paywallBFragment"
+        android:name="com.dynamic.island.oasis.ui.paywall.PaywallBFragment"
+        android:label="PaywallBFragment" />
+
+    <fragment
+        android:id="@+id/paywallCFragment"
+        android:name="com.dynamic.island.oasis.ui.paywall.PaywallCFragment"
+        android:label="PaywallCFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.dynamic.island.oasis.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_permissionsFragment"
+            app:enterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            app:destination="@id/permissionsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_appsFragment"
+            app:enterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down"
+            app:destination="@id/appsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_colorPickerDialog"
+
+            app:destination="@id/colorPickerDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.dynamic.island.oasis.ui.info.InfoFragment"
+        android:label="InfoFragment" >
+
+    </fragment>
+    <dialog
+        android:id="@+id/dialogRate"
+        android:name="com.dynamic.island.oasis.ui.dialogs.rate.DialogRate"
+        android:label="DialogRate" />
+    <fragment
+        android:id="@+id/appsFragment"
+        android:name="com.dynamic.island.oasis.ui.apps.AppsFragment"
+        android:label="AppsFragment" />
+    <fragment
+        android:id="@+id/permissionsFragment"
+        android:name="com.dynamic.island.oasis.ui.permissions.PermissionsFragment"
+        android:label="PermissionsFragment" />
+    <dialog
+        android:id="@+id/colorPickerDialog"
+        android:name="com.dynamic.island.oasis.ui.dialogs.color_picker.ColorPickerDialog"
+        android:label="ColorPickerDialog" />
+    <dialog
+        android:id="@+id/policyDialog"
+        android:name="com.dynamic.island.oasis.ui.dialogs.PolicyDialog"
+        android:label="PolicyDialog" />
+    <dialog
+        android:id="@+id/permissionsDialog"
+        android:name="com.dynamic.island.oasis.ui.dialogs.PermissionDialog"
+        android:label="PermissionsDialog" >
+
+    </dialog>
+    <dialog
+        android:id="@+id/dialogLock"
+        android:name="com.dynamic.island.oasis.ui.dialogs.LockDialog"
+        android:label="LockDialog" />
+</navigation>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="activity"
+            type="android.app.Activity" />
+        <variable
+            name="vm"
+            type="com.dynamic.island.oasis.ui.onboarding.OnboardingViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_onboarding_6" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/onboarding_margin_top"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/MyTextWorkSans20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="@string/for_these_nfeatures_we_need_your_npermissions"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/MyTextWorkSans20"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-6dp"
+                android:gravity="center"
+                android:text="@string/permissions"
+                android:textColor="@color/dark_purple" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="53dp"
+            android:src="@drawable/ic_key_permissions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintVertical_bias="0.35">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{vm::onBatteryClicked}"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.battery ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/battery_optimization" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{(v)->vm.onBackgroundClicked(v)}"
+                android:orientation="horizontal"
+                android:visibility="@{vm.backgroundAvailable ? View.VISIBLE : View.GONE}">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.background ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/start_from_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{(v)->vm.onAutostartClicked(v)}"
+                android:orientation="horizontal"
+                android:visibility="@{vm.autostartAvailable ? View.VISIBLE : View.GONE}">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.autostart ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/autostart" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{vm::onAcsbClicked}"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.accessibility ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/accessibility_service" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{vm::onNotificationsClicked}"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.notifications ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/notifications" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="23dp"
+                android:gravity="center"
+                android:onClick="@{()->vm.onPhoneClicked(activity)}"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@{vm.phone ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    tools:src="@drawable/ic_checkbox_checked" />
+
+
+                <TextView
+                    style="@style/MyTextRoboto16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/phone_contacts" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

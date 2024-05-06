@@ -1,0 +1,18 @@
+    +//alert -> new alert arrived -> alert updated -> collapsed state
+    +//alert -> music/timer/notifcation arrived -> no extra actions, collapsed state is updated
+    +//alert -> call ringing -> alert collapsed, call displayed
+
+    +//call ringing -> alert arrived -> alert is ignored
+    +//call ringing -> music,timer,notification arrived -> no extra actions, collapsed state is updated
+
+    +//call active -> alert arrived -> alert is displayed -> call is displayed
+    +//call active -> music/timer/notification arrived -> show extra bubble with music/timer/notification
+
+    +//quick action -> alert arrived -> quick action collapsed, alert displayed -> quick action
+    +//quick action -> call ringing -> quick action collapsed, call displayed -> collapsed state
+    +//quick action -> music,timer,notification arrived -> no extra actions, collapsed state is updated
+
+    +//music/timer/notification -> alert arrived -> alert displayed-> music/timer/notification
+    +//music/timer/notification -> call/music/timer/notification arrived-> show extra bubble with call/music/timer/notificaiton
+   
+    +//expanded music/timer/notification -> alert/call ringing -> music/timer/notification collapse -> show alert/call

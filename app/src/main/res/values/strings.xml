@@ -1,0 +1,158 @@
+<resources>
+    <string name="accessibility_title" translatable="false">@string/app_name</string>
+    <string name="app_name_lines" translatable="false">Dynamic\nOasis</string>
+    <string name="app_name" translatable="false">Dynamic Oasis</string>
+    <string name="hex" translatable="false">HEX</string>
+    <string name="empty" translatable="false"></string>
+    <string name="terms">Terms &amp; Conditions</string>
+    <string name="policy_confirmation">Please confirm that you agree with our \n<a href="https://sites.google.com/view/oasis-policy">Privacy Policy</a> and <a href="https://sites.google.com/view/dynamicoasisterms">Terms &amp; Conditions</a></string>
+
+    <string name="checking">Checking…</string>
+    <string name="disable_landscape">Disable in landscape</string>
+    <string name="save_profit">Save %s</string>
+    <string name="sub_montly_description">%s per month</string>
+    <string name="sub_year_description">%s per year</string>
+    <string name="sub_lifetime_description">%s per lifetime subscription</string>
+    <string name="sub_year_trial_description">7 days free, then %s per year</string>
+    <string name="sub_month_trial_description">7 days free, then %s per month</string>
+    <string name="sub_year_trial_description_short">Then %s per year</string>
+    <string name="sub_month_trial_description_short">Then %s per month</string>
+
+    <string name="notifications_nmessages"><![CDATA[notifications &\nmessages]]></string>
+    <string name="phone_contacts"><![CDATA[Phone & Contacts]]></string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+
+
+    <string name="free_trial">Free\ntrial</string>
+    <string name="sub_monthly_number">1\nMonth</string>
+    <string name="sub_yearly_number">1\nYear</string>
+    <string name="accessibility_desc">The app uses the Accessibility API to display a floating popup to enable multitasking.\n\nNo data is collected or shared using the Accessibility API!</string>
+    <string name="simply_touch_the_island_nand_hold_to_control_the_nplaylist">Simply touch and hold\nto control the\nplaylist</string>
+    <string name="please_lock_the_napp_in_recent_nand_do_not_close">Please, lock the\napp in recent\nand do not close</string>
+    <string name="do_not_use_npower_saving">Do not use\npower saving!</string>
+    <string name="it_is_important_for_a_proper_work_of">It is important for\na proper work of\nthe application</string>
+    <string name="for_these_nfeatures_we_need_your_npermissions">For these\nfeatures we\nneed your</string>
+    <string name="accept_calls_nand">Accept calls\nand</string>
+    <string name="how_do_you_feel_about_using_ndynamic_oasis">How do you feel about using\nDynamic Oasis?</string>
+    <string name="permission_acsb_text">Please, grant accessibility permission \nfor proper application work</string>
+    <string name="permission_notif_text">Please, grant notifications permission \nfor proper application work</string>
+    <string name="permission_phone_text">Please, grant phone permission \nfor proper application work</string>
+    <string name="permission_battery_text">Please, grant battery optimization permission \nfor proper application work</string>
+    <string name="permission_audio_text">Please, grant audio permission \nfor proper application work</string>
+    <string name="get_the_full_oasis_n_experience">Get the full Oasis \n experience</string>
+<!-- ....................................................................................................................... -->
+    <string name="clear_notifications">Automatically clear notifications</string>
+
+    <string name="autostart">Autostart permission</string>
+    <string name="autostart_toast">"Select apps -> Autostart -> Enable Dynamic Oasis"</string>
+
+    <string name="start_from_background">Background start</string>
+    <string name="lock_in_recent">Lock Dynamic Oasis in recent apps as shown below. It\'s important for stable application work</string>
+    <string name="how_to"><u>Watch video guide</u></string>
+
+    <string name="_1_check_battery_optimization_permission_in_settings">1. Grant all permissions in settings page</string>
+    <string name="dont_show">Don\'t show</string>
+    <string name="done">Done</string>
+
+    <string name="start_from_background_toast">Select Dynamic Oasis -> Start apps from background -> Allow</string>
+
+
+
+    <string name="bad_rating">Please, tell us about application issues</string>
+    <string name="accessibility_data">Data protection</string>
+    <string name="accessibility_disclosure">The app uses the AccessibilityService API to display a floating popup. No data is collected or shared using the AccessibilityService API!</string>
+    <string name="policy">Privacy Policy</string>
+    <string name="subscription_reason_1">Remove advertisements</string>
+    <string name="subscription_reason_2">Unlock all application features</string>
+    <string name="subscription_reason_3">Support the developer</string>
+    <string name="success">Pro version unlocked</string>
+    <string name="error">Error</string>
+    <string name="sub_montly_title">Monthly subscription</string>
+    <string name="sub_year_title">Annual subscription</string>
+    <string name="sub_lifetime_title">Lifetime</string>
+    <string name="sub_trial_title">Free trial</string>
+    <string name="trial_description">7-Day Free Trial</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="vibro">Vibro</string>
+    <string name="wired">Wired</string>
+    <string name="choose">Choose</string>
+    <string name="unknown">Unknown</string>
+    <string name="incoming_call">Incoming call</string>
+    <string name="timer">Timer</string>
+    <string name="reply">Reply…</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="listen_to">Listen to</string>
+    <string name="music">Music</string>
+    <string name="see_all_needed">See all needed</string>
+    <string name="reply_to_them_right_in">Reply to them right in</string>
+    <string name="use">Use</string>
+    <string name="quick_actions">quick actions</string>
+    <string name="check_the_timer">Check the timer</string>
+    <string name="much_more">much more!</string>
+    <string name="to_keep_it_working">to keep it working</string>
+    <string name="finish">Finish</string>
+    <string name="acsb_toast">Select Downloaded apps -> Dynamic Oasis -> Turn on</string>
+    <string name="notifications_toast">Select Dynamic Oasis -> Allow</string>
+    <string name="permissions">permissions</string>
+    <string name="accessibility_service">Accessibility service</string>
+    <string name="notifications">Notification listener</string>
+    <string name="battery_optimization">Battery optimization</string>
+    <string name="record_audio">Record audio</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="info">Info</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="remove_ads">Remove ads</string>
+    <string name="select_background">Select background</string>
+    <string name="horizontal_position">Horizontal position</string>
+    <string name="vertical_position">Vertical position</string>
+    <string name="height">Height</string>
+    <string name="width">Width</string>
+    <string name="share_the_application">Share the application</string>
+    <string name="rate_us">Rate us</string>
+    <string name="contact_support">Contact support</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="why_the_app_does_not_work">Why the app stops working?</string>
+    <string name="_2_make_sure_you_are_not_using_power_saving">2. Make sure you are not using power saving</string>
+    <string name="three" translatable="false">3. %s</string>
+    <string name="rate">Rate</string>
+    <string name="cancel">Cancel</string>
+    <string name="compatible_apps">Compatible apps</string>
+    <string name="permissions_capital">Permissions</string>
+    <string name="record_audio_required">Record audio permission required</string>
+    <string name="open_app_by_click">Open app by click on Oasis</string>
+    <string name="show_alert">Show system alerts</string>
+    <string name="swipe_to_skip">Swipe to skip music</string>
+    <string name="realistic_visualizer">Realistic audio visualizer</string>
+    <string name="quick_action_panel">Quick action panel</string>
+    <string name="quick_action_screenshot">Show app logo on screenshot</string>
+    <string name="oasis_color">Oasis color</string>
+    <string name="oasis_notif_actions">Reply to notifications inside Oasis</string>
+    <string name="oasis_lockscreen">Show Oasis on lock screen</string>
+    <string name="disable_notifications">Disable Oasis push notifications</string>
+    <string name="ok">OK</string>
+    <string name="color">Color</string>
+
+    <string name="reset">Reset</string>
+    <string name="apps_count">%s applications</string>
+    <string name="select_all">Select all</string>
+    <string name="agree">Agree</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="allow">Allow</string>
+    <string name="not_now">Not now</string>
+    <string name="permission_acsb_title">Accessibility permission</string>
+    <string name="permission_notif_title">Notifications permission</string>
+    <string name="permission_phone_title">Phone permission</string>
+    <string name="permission_battery_title">Battery optimization permission</string>
+    <string name="permission_audio_title">Audio permission</string>
+    <string name="buy_now">Buy now</string>
+    <string name="cancel_anytime_auto_renewal">Cancel anytime, auto renewal</string>
+    <string name="cont">Continue</string>
+    <string name="unlock_everything">Unlock Everything!</string>
+    <string name="how_would_you_rate_n_dynamic_oasis">How would you rate \n Dynamic Oasis?</string>
+    <string name="restore_purchases">Restore purchases</string>
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.dynamic.island.oasis.Constants"/>
+        <variable
+            name="pos"
+            type="Integer" />
+        <variable
+            name="vm"
+            type="com.dynamic.island.oasis.ui.paywall.PaywallViewModel" />
+    </data>
+    <RelativeLayout android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:visibility="@{pos >= 0 &amp;&amp;  pos &lt; vm.allSubscriptions.size() &amp;&amp; (vm.allSubscriptions.get(pos).id.equals(Constants.SUB_YEARLY) || vm.allSubscriptions.get(pos).id.equals(Constants.SUB_YEARLY_TRIAL))  ? View.VISIBLE : View.GONE}"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout9"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout9"
+        app:layout_constraintTop_toTopOf="parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() &amp;&amp;vm.selectedSubscription.id.equals(vm.allSubscriptions.get(pos).id) ? @drawable/bg_profit_selected : @drawable/bg_profit_unselected}"
+            tools:src="@drawable/bg_profit_selected" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:text="@{String.format(@string/save_profit, vm.profit)}"
+            android:textColor="@{pos >= 0 &amp;&amp; pos &lt; vm.allSubscriptions.size() &amp;&amp; vm.selectedSubscription.id.equals(vm.allSubscriptions.get(pos).id) ? @color/white : @color/dark_purple_4}"
+            tools:text="Save 44%" />
+
+    </RelativeLayout>
+</layout>
