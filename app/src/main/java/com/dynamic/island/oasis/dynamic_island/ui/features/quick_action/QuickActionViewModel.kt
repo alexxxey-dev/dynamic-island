@@ -20,19 +20,16 @@ import kotlinx.coroutines.*
 
 
 class QuickActionViewModel(
-    private val prefs: PrefsUtil,
     private val flashlight: Flashlight,
     private val showIntent: (intent: Intent) -> Unit,
-    private val performAction: (action: Int) -> Unit,
     val di: DiViewModel
 ) : OverlayViewModel(di) {
 
     val flashlightVisible = MutableLiveData<Boolean>()
-    val screenshotVisible = MutableLiveData<Boolean>()
+
 
     init {
         flashlightVisible.value = flashlight.hasFlashlight()
-        screenshotVisible.value = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
     }
 
     fun openCamera()=viewModelScope.launch {
@@ -41,10 +38,7 @@ class QuickActionViewModel(
     }
 
 
-    fun lockScreen()=viewModelScope.launch {
-        performAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
-        hideView()
-    }
+
 
 
     fun toggleFlashlight()=viewModelScope.launch {
@@ -53,27 +47,6 @@ class QuickActionViewModel(
 
 
 
-    fun takeScreenshot(mContext: Context) =viewModelScope.launch {
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return@launch
-        di.visible.value = false
-        if (prefs.settingEnabled(Constants.SET_SCREENSHOT_APP))   di.showAppScreenshot()
-        delay(500)
-        performAction(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)
-
-        mContext.contentResolver.registerContentObserver(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, true,
-            object : ContentObserver(Handler()) {
-                override fun onChange(selfChange: Boolean) {
-                    mContext.contentResolver.unregisterContentObserver(this)
-                    if (prefs.settingEnabled(Constants.SET_SCREENSHOT_APP)) di.hideAppScreenshot()
-                    di.visible.value = true
-
-                }
-            }
-        )
-
-    }
 
 
     fun openSettings()  =viewModelScope.launch{

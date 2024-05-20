@@ -2,8 +2,10 @@ package com.dynamic.island.oasis.dynamic_island.listeners.notifications
 
 import android.app.Notification
 import android.app.NotificationChannel
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import android.os.UserHandle
 import android.service.notification.NotificationListenerService
@@ -11,6 +13,8 @@ import android.service.notification.StatusBarNotification
 import android.telecom.TelecomManager
 import com.dynamic.island.oasis.Constants
 import com.dynamic.island.oasis.dynamic_island.Logs
+import com.dynamic.island.oasis.dynamic_island.service.MainService
+import com.dynamic.island.oasis.dynamic_island.service.ServiceWrapper
 import com.dynamic.island.oasis.dynamic_island.util.PhoneUtil
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -41,6 +45,7 @@ class NotificationListener : NotificationListenerService() {
         job = null
         sendBroadcast(Intent(Constants.DESTROY_MEDIA_LISTENER))
         Logs.log("notificationListenerDisconnected")
+        requestRebind(ComponentName(this, NotificationListener::class.java))
         super.onListenerDisconnected()
     }
 
@@ -65,7 +70,7 @@ class NotificationListener : NotificationListenerService() {
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         super.onNotificationPosted(sbn)
         sendBroadcast(Intent(Constants.CREATE_MEDIA_LISTENER))
-
+        MainService.startViaWorker(this)
         if(job?.isActive == true) job?.cancel()
         job = CoroutineScope(Dispatchers.IO).launch {
             val isTimer = timer?.onNotificationPosted(sbn) ?: false
@@ -79,6 +84,7 @@ class NotificationListener : NotificationListenerService() {
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
         super.onNotificationRemoved(sbn)
+        MainService.startViaWorker(this)
         val isTimer = timer?.onNotificationRemoved(sbn) ?: false
         if(!isTimer && notificationValid(sbn)) sender?.onRemoved(sbn)
     }

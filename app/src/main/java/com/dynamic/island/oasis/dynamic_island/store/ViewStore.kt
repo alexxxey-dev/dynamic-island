@@ -26,6 +26,7 @@ import com.dynamic.island.oasis.dynamic_island.ui.features.screenshot.Screenshot
 import com.dynamic.island.oasis.util.ext.analyticsEvent
 
 
+
 class ViewStore(
     private val context: Context,
     private val viewModelStore: ViewModelStore,
@@ -38,6 +39,7 @@ class ViewStore(
     override val lifecycle: Lifecycle
         get() = registry
 
+    //TODO optimize views; create them only when needed
     private val screenshotView = ScreenshotView(windowManager,inflater)
     private val bubbleView = BubbleView(viewModelStore,context,windowManager,inflater)
     private val mainView = MainView( context, viewModelStore.mainViewModel,windowManager,inflater)

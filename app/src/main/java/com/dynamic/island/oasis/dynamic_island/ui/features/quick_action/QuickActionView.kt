@@ -66,28 +66,19 @@ class QuickActionView(
                 context.analyticsEvent("on_quick_action_camera")
                 viewModel.openCamera()
             }
-            screenshot.scaleClickListener {
-                context.analyticsEvent("on_quick_action_screenshot")
-                viewModel.takeScreenshot(context)
-            }
+
             flashlight.scaleClickListener {
                 context.analyticsEvent("on_quick_action_flashlight")
                 viewModel.toggleFlashlight()
             }
-            lock.scaleClickListener {
-                context.analyticsEvent("on_quick_action_lock")
-                viewModel.lockScreen()
-            }
+
             settings.scaleClickListener {
                 context.analyticsEvent("on_quick_action_settings")
                 viewModel.openSettings()
             }
             root.setOnTouchListener(OutsideTouchListener(viewModel::hideView))
         }
-        viewModel.screenshotVisible.observe(this) {
-            binding?.screenshot?.visibility = if (it) View.VISIBLE else View.GONE
-            binding?.flashlight?.visibility = if (it) View.VISIBLE else View.GONE
-        }
+
     }
 
     override fun drawState(current: DiState, previous: DiState?, diParams: DiParams) {

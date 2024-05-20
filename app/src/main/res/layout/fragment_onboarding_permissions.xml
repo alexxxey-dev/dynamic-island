@@ -161,14 +161,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="23dp"
                 android:gravity="center"
-                android:onClick="@{vm::onAcsbClicked}"
+                android:onClick="@{vm::onOverlayClicked}"
                 android:orientation="horizontal">
 
 
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@{vm.accessibility ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
+                    android:src="@{vm.overlay ? @drawable/ic_checkbox_checked : @drawable/ic_checkbox_unchecked}"
                     tools:src="@drawable/ic_checkbox_checked" />
 
 
@@ -177,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:text="@string/accessibility_service" />
+                    android:text="@string/draw_overlay" />
             </LinearLayout>
 
             <LinearLayout

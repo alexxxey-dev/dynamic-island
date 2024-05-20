@@ -21,9 +21,8 @@ import androidx.core.content.ContextCompat
 import com.dynamic.island.oasis.Constants
 import com.dynamic.island.oasis.R
 import com.dynamic.island.oasis.data.PrefsUtil
-import com.dynamic.island.oasis.data.models.MyPermission
 import com.dynamic.island.oasis.data.models.PermissionType
-import com.dynamic.island.oasis.dynamic_island.AcsbService
+import com.dynamic.island.oasis.dynamic_island.service.MainService
 import com.dynamic.island.oasis.dynamic_island.listeners.notifications.NotificationListener
 import com.dynamic.island.oasis.util.ext.safeStartActivity
 import kotlinx.coroutines.delay
@@ -33,17 +32,16 @@ class PermissionsUtil(
     private val context: Context,
     private val prefs: PrefsUtil,
     private val appOpsManager: AppOpsManager,
-    private val acsbManager: AccessibilityManager,
     private val powerManager: PowerManager,
     private val notificationManager: NotificationManager
 ) {
     private val miui = MIUI(context, appOpsManager)
     private val autoStart = AutoStart(context)
 
-    suspend fun grant(type: PermissionType, activity: Activity? = null) {
+    fun grant(type: PermissionType, activity: Activity? = null) {
         when (type) {
             PermissionType.PHONE -> requestPhonePermission(activity)
-            PermissionType.ACSB -> requestAcsb()
+            PermissionType.DRAW_OVERLAY -> requestOverlay()
             PermissionType.BATTERY -> requestIgnoringBattery()
             PermissionType.NOTIF -> requestNotificationListener()
             PermissionType.START_BACKGROUND -> requestStartFromBackgroundMIUI()
@@ -55,7 +53,7 @@ class PermissionsUtil(
     fun isGranted(type: PermissionType): Boolean {
         return when (type) {
             PermissionType.PHONE -> hasPhonePermission()
-            PermissionType.ACSB -> acsbEnabled()
+            PermissionType.DRAW_OVERLAY -> isOverlay()
             PermissionType.BATTERY -> isIgnoringBattery()
             PermissionType.NOTIF -> notificationListener()
             PermissionType.START_BACKGROUND -> if(miui.isMIUI()) miui.startFromBackgroundGranted() else true
@@ -72,9 +70,28 @@ class PermissionsUtil(
     }
 
 
-    private fun acsbEnabled(): Boolean {
-        return check1() || check2()
+    private fun requestOverlay() {
+        try {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:${context.packageName}")
+            )
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+            try {
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(intent)
+                Toast.makeText(context, R.string.overlay_toast, Toast.LENGTH_LONG).show()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
     }
+
+    private fun isOverlay() = Settings.canDrawOverlays(context)
 
 
     private fun requestAutostart() {
@@ -116,60 +133,6 @@ class PermissionsUtil(
         }
     }
 
-
-    private fun check1(): Boolean {
-
-        val enabledServices =
-            acsbManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
-        for (enabledService in enabledServices) {
-            val enabledServiceInfo = enabledService.resolveInfo.serviceInfo
-            val packageOk =
-                enabledServiceInfo.packageName.equals(context.packageName, ignoreCase = true)
-            val nameOk =
-                enabledServiceInfo.name.equals(AcsbService::class.java.name, ignoreCase = true)
-            if (packageOk && nameOk) {
-                return true
-            }
-        }
-        return false
-
-    }
-
-
-    private fun check2(): Boolean {
-        val accessibilityEnabled = try {
-            Settings.Secure.getInt(
-                context.contentResolver,
-                Settings.Secure.ACCESSIBILITY_ENABLED
-            )
-        } catch (e: Settings.SettingNotFoundException) {
-            e.printStackTrace()
-            0
-        }
-        val mStringColonSplitter = TextUtils.SimpleStringSplitter(':')
-        if (accessibilityEnabled == 1) {
-            val settingValue = Settings.Secure.getString(
-                context.contentResolver,
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-            )
-
-            if (settingValue != null) {
-                mStringColonSplitter.setString(settingValue)
-                while (mStringColonSplitter.hasNext()) {
-                    val accessibilityService = mStringColonSplitter.next()
-                    val myName = "${context.packageName}/${AcsbService::class.java.name}"
-                    val nameEquals = accessibilityService.equals(
-                        myName,
-                        ignoreCase = true
-                    )
-                    if (nameEquals) {
-                        return true
-                    }
-                }
-            }
-        }
-        return false
-    }
 
     private fun isIgnoringBattery() =
         (powerManager).isIgnoringBatteryOptimizations(context.packageName)
@@ -232,14 +195,6 @@ class PermissionsUtil(
     }
 
 
-    private suspend fun requestAcsb() {
-        Toast.makeText(context.applicationContext, R.string.acsb_toast, Toast.LENGTH_SHORT).show()
-        delay(Constants.TOAST_SHORT)
-        val intent =
-            Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-
-    }
 
     private fun requestNotificationListener() {
         Toast.makeText(context.applicationContext, R.string.notifications_toast, Toast.LENGTH_SHORT).show()

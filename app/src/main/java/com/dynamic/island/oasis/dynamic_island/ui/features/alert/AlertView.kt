@@ -44,7 +44,7 @@ class AlertView(
         if (!same) {
             Logs.view("show_alert_view")
             binding = createView()
-            setupView(binding!!)
+             setupView(binding!!)
             showAlert(current.text, current.animation)
             expand(
                 startX = 0.3f,

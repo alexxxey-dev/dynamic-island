@@ -1,6 +1,8 @@
-package com.dynamic.island.oasis.dynamic_island
+package com.dynamic.island.oasis.dynamic_island.service
 
 import android.accessibilityservice.AccessibilityService
+import android.app.Activity
+import android.app.ActivityManager
 import android.app.AppOpsManager
 import android.app.KeyguardManager
 import android.app.NotificationManager
@@ -18,6 +20,10 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.dynamic.island.oasis.dynamic_island.util.DiParamsProvider
 import com.dynamic.island.oasis.R
 import com.dynamic.island.oasis.dynamic_island.store.ListenerStore
@@ -25,6 +31,8 @@ import com.dynamic.island.oasis.dynamic_island.store.ViewModelStore
 import com.dynamic.island.oasis.dynamic_island.store.ViewStore
 import com.dynamic.island.oasis.util.PermissionsUtil
 import com.dynamic.island.oasis.data.PrefsUtil
+import com.dynamic.island.oasis.dynamic_island.Logs
+import com.dynamic.island.oasis.dynamic_island.listeners.restart.RestartWorker
 import com.dynamic.island.oasis.dynamic_island.util.BatteryUtil
 import com.dynamic.island.oasis.dynamic_island.util.Flashlight
 import com.dynamic.island.oasis.dynamic_island.util.PhoneUtil
@@ -32,13 +40,10 @@ import com.dynamic.island.oasis.util.ext.createWakeLock
 import com.dynamic.island.oasis.util.ext.destroy
 import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
+import java.util.concurrent.TimeUnit
 
 
-class AcsbService : AccessibilityService() {
-    var isVisible: Boolean = false
-        private set
-    private var wakeLock: PowerManager.WakeLock? = null
-
+class MainService : ServiceWrapper() {
     private var listenerStore: ListenerStore? = null
     private var viewModelStore: ViewModelStore? = null
     private var viewStore: ViewStore? = null
@@ -63,18 +68,15 @@ class AcsbService : AccessibilityService() {
     private var inflater:LayoutInflater? = null
     private var power:PowerManager? = null
     private var appOpsManager:AppOpsManager? = null
-    private var acsbManager:AccessibilityManager? = null
 
-    override fun onServiceConnected() {
+    override fun onStart() {
         Logs.acsb("acsbService; onServiceConnected")
-        super.onServiceConnected()
+        FirebaseApp.initializeApp(this)
         setTheme(R.style.Theme_DynamicIsland)
 
         clipboard = applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        acsbManager = applicationContext.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
         appOpsManager = applicationContext.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
         power = applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = createWakeLock(power!!)
         gson = Gson()
         inflater = LayoutInflater.from(this )
         telephony = applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
@@ -92,7 +94,7 @@ class AcsbService : AccessibilityService() {
         prefsUtil = PrefsUtil(this, prefs!!)
         diParams = DiParamsProvider(prefs!!,window!!,this,gson!!)
 
-        permissions = PermissionsUtil(this, prefsUtil!!, appOpsManager!!,acsbManager!!,power!!,notifications!!)
+        permissions = PermissionsUtil(this, prefsUtil!!, appOpsManager!!,power!!,notifications!!)
         viewModelStore = ViewModelStore(
             this,
             prefsUtil!!,
@@ -106,7 +108,6 @@ class AcsbService : AccessibilityService() {
             flashlight!!,
             keyguard!!
         )
-
         listenerStore = ListenerStore(
             this,
             permissions!!,
@@ -115,13 +116,20 @@ class AcsbService : AccessibilityService() {
             telephony!!,
             clipboard!!
         )
+        viewStore = ViewStore(
+            this,
+            viewModelStore!!,
+            window!!,
+            inflater!!
+        )
     }
 
 
-    override fun onUnbind(intent: Intent?): Boolean {
+    override fun onStop() {
         Logs.acsb("acsbService; onDestroy")
 
-        hideViews()
+        viewStore?.onDestroy()
+        viewStore = null
         viewModelStore?.onDestroy()
         listenerStore?.onDestroy()
 
@@ -147,60 +155,48 @@ class AcsbService : AccessibilityService() {
         listenerStore = null
         appOpsManager = null
         clipboard = null
-        wakeLock?.destroy()
-        acsbManager = null
-
-
-        return super.onUnbind(intent)
     }
 
 
 
-    fun showViews() {
-        Logs.acsb("acsbService; showViews")
 
-        if (viewStore != null || isVisible) {
-            hideViews()
+
+
+
+    companion object{
+        fun init(context: Context) {
+            val request = PeriodicWorkRequest.Builder(
+                RestartWorker::class.java, RestartWorker.RESTART_PERIOD_MIN, TimeUnit.MINUTES
+            ).build()
+
+            WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                RestartWorker.RESTART_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, request
+            )
         }
 
-        viewStore = ViewStore(
-            this,
-            viewModelStore!!,
-            window!!,
-            inflater!!
-        )
-        isVisible = true
+        fun stop(context: Context) {
+            context.stopService(Intent(context, MainService::class.java))
+        }
+
+        fun startViaWorker(context: Context) {
+            val prefs= context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+            val prefsUtil = PrefsUtil(context, prefs)
+            if (!prefsUtil.serviceEnabled()) return
+
+            val request = OneTimeWorkRequest.Builder(RestartWorker::class.java).build()
+            WorkManager.getInstance(context).enqueue(request)
+        }
+
+        fun isRunning(context: Context): Boolean {
+            val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val serviceClass = MainService::class.java
+            for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+                if (serviceClass.name == service.service.className) {
+                    return true
+                }
+            }
+            return false
+        }
     }
-
-
-    fun hideViews() {
-        Logs.acsb("acsbService; hideViews")
-        isVisible = false
-        viewStore?.onDestroy()
-        viewStore = null
-    }
-
-
-    override fun onCreate() {
-        Logs.acsb("acsbService; onCreate")
-        FirebaseApp.initializeApp(this)
-        super.onCreate()
-    }
-
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Logs.acsb("acsbService; onStartCommand")
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-
-    override fun onInterrupt() {
-        Logs.acsb("onInterrupt")
-    }
-
-    override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        listenerStore?.onAccessibilityEvent(event)
-    }
-
 
 }

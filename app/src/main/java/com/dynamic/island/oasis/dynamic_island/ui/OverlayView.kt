@@ -178,28 +178,29 @@ abstract class OverlayView<V : ViewDataBinding>(
     private fun collapsedLayout() = WindowManager.LayoutParams().apply {
         width = WindowManager.LayoutParams.WRAP_CONTENT
         height = WindowManager.LayoutParams.WRAP_CONTENT
-        type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
+        type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         format = PixelFormat.TRANSLUCENT
         gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
         flags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
     }
 
 
     fun setFocusable(focusable: Boolean) {
         if (binding == null) return
-        val focusableFlags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-        val notFocusableFlags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-        windowManager.safeUpdateView(binding?.root, layout.apply {
-            flags = if (focusable) focusableFlags else notFocusableFlags
-        })
+        //TODO
+//        val focusableFlags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+//                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+//                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+//        val notFocusableFlags = WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+//                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+//                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+//                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+//        windowManager.safeUpdateView(binding?.root, layout.apply {
+//            flags = if (focusable) focusableFlags else notFocusableFlags
+//        })
     }
 
     suspend fun collapse(

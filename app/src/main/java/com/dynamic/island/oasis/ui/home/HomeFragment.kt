@@ -48,7 +48,6 @@ class   HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home)
         requireActivity().createReceiver(
             viewModel.receiver,
             IntentFilter().apply {
-                addAction(Constants.ACTION_SEND_DI_STATE)
                 addAction(Constants.ACTION_SUBSCRIPTION_DEACTIVATED)
                 addAction(Constants.ACTION_SUBSCRIPTION_ACTIVATED)
             }

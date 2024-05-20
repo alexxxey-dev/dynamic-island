@@ -2,7 +2,6 @@ package com.dynamic.island.oasis.ui.onboarding
 
 import android.app.Activity
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,7 +23,7 @@ class OnboardingViewModel(private val permissions: PermissionsUtil, private val 
 
     val showDestination = SingleLiveEvent<Int>()
 
-    val accessibility = MutableLiveData<Boolean>()
+    val overlay = MutableLiveData<Boolean>()
     val notifications = MutableLiveData<Boolean>()
     val battery = MutableLiveData<Boolean>()
     val phone = MutableLiveData<Boolean>()
@@ -59,10 +58,10 @@ class OnboardingViewModel(private val permissions: PermissionsUtil, private val 
     }
 
 
-    fun onAcsbClicked(view: View) {
-        if (accessibility.value == true) return
+    fun onOverlayClicked(view: View) {
+        if (overlay.value == true) return
         viewModelScope.safeLaunch {
-            permissions.grant(PermissionType.ACSB)
+            permissions.grant(PermissionType.DRAW_OVERLAY)
         }
 
 
@@ -108,7 +107,7 @@ class OnboardingViewModel(private val permissions: PermissionsUtil, private val 
 
 
     fun checkPermissions() {
-        accessibility.value = permissions.isGranted(PermissionType.ACSB)
+        overlay.value = permissions.isGranted(PermissionType.DRAW_OVERLAY)
         notifications.value = permissions.isGranted(PermissionType.NOTIF)
         battery.value = permissions.isGranted(PermissionType.BATTERY)
         phone.value = permissions.isGranted(PermissionType.PHONE)

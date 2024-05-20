@@ -98,10 +98,8 @@ object Constants {
 
     const val MIN_DB_UPDATE = 1000 * 60
     const val TOAST_SHORT = 2000L
-    const val ACTION_GET_DI_STATE = "ACTION_GET_DI_STATE"
-    const val ACTION_SEND_DI_STATE = "ACTION_SEND_DI_STATE"
-    const val ACTION_UPDATE_DI_STATE = "ACTION_UPDATE_DI_STATE"
-    const val PARAM_DI_STATE = "PARAM_DI_STATE"
+
+    const val DI_VISIBLE = "PARAM_DI_STATE"
 
     const val ACTION_CHANGE_DI_PARAMS = "ACTION_CHANGE_NOTCH_PARAMS"
 

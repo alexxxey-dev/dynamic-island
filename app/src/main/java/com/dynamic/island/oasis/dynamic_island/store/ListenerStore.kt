@@ -5,12 +5,10 @@ import android.content.*
 import android.media.AudioManager
 import android.media.session.MediaSessionManager
 import android.telephony.TelephonyManager
-import android.view.accessibility.AccessibilityEvent
 import android.widget.Toast
 import com.dynamic.island.oasis.Constants
 import com.dynamic.island.oasis.data.models.PermissionType
-import com.dynamic.island.oasis.dynamic_island.AcsbService
-import com.dynamic.island.oasis.dynamic_island.Logs
+import com.dynamic.island.oasis.dynamic_island.service.MainService
 import com.dynamic.island.oasis.dynamic_island.listeners.ExceptionListener
 import com.dynamic.island.oasis.dynamic_island.listeners.PhoneStateListener
 import com.dynamic.island.oasis.dynamic_island.listeners.media.MediaListener
@@ -25,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ListenerStore(
-    private val acsb: AcsbService,
+    private val acsb: MainService,
     private val permissions: PermissionsUtil,
     private val viewModelStore: ViewModelStore,
     private val media: MediaSessionManager,
@@ -41,8 +39,6 @@ class ListenerStore(
 
     private fun createReceiver() {
         acsb.createReceiver(receiver, IntentFilter().apply {
-            addAction(Constants.ACTION_UPDATE_DI_STATE)
-            addAction(Constants.ACTION_GET_DI_STATE)
             addAction(Constants.ACTION_NOTIFICATION_ACTIONS_UPDATED)
             addAction(Intent.ACTION_CONFIGURATION_CHANGED)
             addAction(Intent.ACTION_USER_PRESENT)
@@ -88,16 +84,6 @@ class ListenerStore(
     ) = CoroutineScope(Dispatchers.IO).safeLaunch {
         withContext(Dispatchers.Main) {
             when (intent.action) {
-                Constants.ACTION_UPDATE_DI_STATE -> updateDiState(intent)
-                Constants.ACTION_GET_DI_STATE -> {
-                    acsb.sendBroadcast(
-                        Intent(Constants.ACTION_SEND_DI_STATE).putExtra(
-                            Constants.PARAM_DI_STATE,
-                            acsb.isVisible
-                        )
-                    )
-                }
-
                 Constants.ACTION_NOTIFICATION_ACTIONS_UPDATED -> viewModelStore.notificationViewModel.updateActionsVisibility()
                 Constants.ACTION_UPDATE_TIMER_ACTIONS -> viewModelStore.timerViewModel.updateNotifActions(
                     intent
@@ -121,7 +107,6 @@ class ListenerStore(
                 Constants.ACTION_REMOVED_NOTIFICATION -> {
                     viewModelStore.notificationViewModel.onSystemNotificationRemove(intent)
                 }
-
 
                 Intent.ACTION_SCREEN_OFF -> {
                     viewModelStore.diViewModel.onScreenOff()
@@ -152,12 +137,9 @@ class ListenerStore(
         }
     }
 
-    private fun updateDiState(intent: Intent) {
-        val showViews = intent.getBooleanExtra(Constants.PARAM_DI_STATE, false)
-        if (showViews) acsb.showViews() else acsb.hideViews()
-        createMediaListener()
-        createPhoneListener()
-    }
+
+
+
 
     fun onDestroy() {
         acsb.destroyReceiver(receiver)
@@ -165,12 +147,6 @@ class ListenerStore(
         destroyMediaListener()
     }
 
-    fun onAccessibilityEvent(event: AccessibilityEvent) {
-        viewModelStore.diViewModel.loadPackageName(event)?.let { pn ->
-            viewModelStore.diViewModel.activePackageName.value = pn
-
-        }
-    }
 
     private var toastJob: Job? = null
     private fun createExceptionListener() {

@@ -26,7 +26,6 @@ import com.dynamic.island.oasis.util.ext.isActivity
 
 class DiViewModel(
     private val context: Context,
-    private val packageManager: PackageManager,
     private val prefs: PrefsUtil,
     private val diParamsProvider: DiParamsProvider,
     private val keyguard: KeyguardManager
@@ -40,9 +39,6 @@ class DiViewModel(
     val params = MutableLiveData<DiParams>()
     val visible = MutableLiveData<Boolean>(true)
     val screenLocked = MutableLiveData<Boolean>(false)
-
-
-    val activePackageName = MutableLiveData<String>()
 
 
     val showBubble = SingleLiveEvent<DiState>()
@@ -115,21 +111,7 @@ class DiViewModel(
         params.value = diParamsProvider.provide()
     }
 
-    fun showAppScreenshot() {
-        val mPackage = activePackageName.value ?: return
-        val mTitle = context.getAppTitle(mPackage)
-        val mLogo = context.packageManager.getAppLogo(mPackage)
-        val mColor = context.getAccentColor(mPackage)
-        if (mTitle.isNullOrBlank() || mLogo == null || mColor == null) return
-        val mData = AppData(
-            logo = mLogo,
-            title = mTitle,
-            color = Color.BLACK,
-            diBackground = loadBackground()
-        )
 
-        showAppScreenshot.value = mData
-    }
 
     fun hideAppScreenshot() {
         hideAppScreenshot.value = Unit
@@ -158,13 +140,7 @@ class DiViewModel(
     }
 
 
-    fun loadPackageName(event: AccessibilityEvent): String? {
-        if (event.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return null
-        if (event.packageName == null || event.className == null) return null
-        if (!packageManager.isActivity(event)) return null
 
-        return event.packageName.toString()
-    }
 
 
 

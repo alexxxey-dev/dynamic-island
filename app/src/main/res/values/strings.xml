@@ -1,7 +1,7 @@
 <resources>
     <string name="accessibility_title" translatable="false">@string/app_name</string>
     <string name="app_name_lines" translatable="false">Dynamic\nOasis</string>
-    <string name="app_name" translatable="false">Dynamic Oasis</string>
+    <string name="app_name" translatable="false">#1 Dynamic Oasis</string>
     <string name="hex" translatable="false">HEX</string>
     <string name="empty" translatable="false"></string>
     <string name="terms">Terms &amp; Conditions</string>
@@ -34,7 +34,7 @@
     <string name="for_these_nfeatures_we_need_your_npermissions">For these\nfeatures we\nneed your</string>
     <string name="accept_calls_nand">Accept calls\nand</string>
     <string name="how_do_you_feel_about_using_ndynamic_oasis">How do you feel about using\nDynamic Oasis?</string>
-    <string name="permission_acsb_text">Please, grant accessibility permission \nfor proper application work</string>
+    <string name="permission_overlay_text">Please, grant overlay permission \nfor proper application work</string>
     <string name="permission_notif_text">Please, grant notifications permission \nfor proper application work</string>
     <string name="permission_phone_text">Please, grant phone permission \nfor proper application work</string>
     <string name="permission_battery_text">Please, grant battery optimization permission \nfor proper application work</string>
@@ -54,7 +54,7 @@
     <string name="dont_show">Don\'t show</string>
     <string name="done">Done</string>
 
-    <string name="start_from_background_toast">Select Dynamic Oasis -> Start apps from background -> Allow</string>
+    <string name="start_from_background_toast">Select Dynamic Oasis -> Start from background -> Allow</string>
 
 
 
@@ -94,10 +94,10 @@
     <string name="much_more">much more!</string>
     <string name="to_keep_it_working">to keep it working</string>
     <string name="finish">Finish</string>
-    <string name="acsb_toast">Select Downloaded apps -> Dynamic Oasis -> Turn on</string>
+    <string name="overlay_toast">Select Dynamic Oasis -> Allow</string>
     <string name="notifications_toast">Select Dynamic Oasis -> Allow</string>
     <string name="permissions">permissions</string>
-    <string name="accessibility_service">Accessibility service</string>
+    <string name="draw_overlay">Draw overlay</string>
     <string name="notifications">Notification listener</string>
     <string name="battery_optimization">Battery optimization</string>
     <string name="record_audio">Record audio</string>
@@ -144,7 +144,7 @@
     <string name="confirmation">Confirmation</string>
     <string name="allow">Allow</string>
     <string name="not_now">Not now</string>
-    <string name="permission_acsb_title">Accessibility permission</string>
+    <string name="permission_overlay_title">Overlay permission</string>
     <string name="permission_notif_title">Notifications permission</string>
     <string name="permission_phone_title">Phone permission</string>
     <string name="permission_battery_title">Battery optimization permission</string>

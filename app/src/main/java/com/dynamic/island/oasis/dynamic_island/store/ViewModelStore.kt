@@ -5,8 +5,7 @@ import android.app.NotificationManager
 import android.os.Vibrator
 import com.dynamic.island.oasis.data.PrefsUtil
 import com.dynamic.island.oasis.dynamic_island.util.DiParamsProvider
-import com.dynamic.island.oasis.dynamic_island.AcsbService
-import com.dynamic.island.oasis.dynamic_island.Logs
+import com.dynamic.island.oasis.dynamic_island.service.MainService
 import com.dynamic.island.oasis.dynamic_island.ui.features.alert.AlertViewModel
 import com.dynamic.island.oasis.dynamic_island.ui.features.call.CallViewModel
 import com.dynamic.island.oasis.dynamic_island.ui.DiViewModel
@@ -24,7 +23,7 @@ import com.dynamic.island.oasis.util.ext.safeStartActivity
 import com.google.gson.Gson
 
 class ViewModelStore(
-    private val acsb: AcsbService,
+    private val acsb: MainService,
     private val prefs: PrefsUtil,
     private val permissions: PermissionsUtil,
     private val diParamsProvider: DiParamsProvider,
@@ -40,7 +39,7 @@ class ViewModelStore(
 
 
 
-    val diViewModel = DiViewModel(acsb, acsb.packageManager, prefs, diParamsProvider,keyguard)
+    val diViewModel = DiViewModel(acsb, prefs, diParamsProvider,keyguard)
 
     val bubbleViewModel = BubbleViewModel(diViewModel,phone,acsb, prefs)
     val alertViewModel = AlertViewModel(
@@ -75,10 +74,8 @@ class ViewModelStore(
         vibrator,acsb,diViewModel,prefs,gson
     )
     val quickActionViewModel = QuickActionViewModel(
-        prefs,
         flashlight,
         showIntent = { acsb.safeStartActivity(it) },
-        performAction = { acsb.performGlobalAction(it) },
         diViewModel
     )
     val timerViewModel = TimerViewModel(

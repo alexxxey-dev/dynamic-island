@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId "com.dynamic.island.oasis"
-        minSdk 24
+        minSdk 26
         targetSdk 34
-        versionCode 58
-        versionName "3.6"
+        versionCode 60
+        versionName "4.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,7 +31,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            //TODO
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

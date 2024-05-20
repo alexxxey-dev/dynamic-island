@@ -8,7 +8,7 @@ import com.dynamic.island.oasis.Constants
 import com.dynamic.island.oasis.R
 
 class PrefsUtil(private val context: Context, private val prefs: SharedPreferences) {
-
+    fun serviceEnabled(enabled: Boolean? = null) = bool("service_enabled",enabled, default = false)
 
     fun autostart(enabled: Boolean? = null) = bool("autostart", enabled, default = false)
 
@@ -37,8 +37,9 @@ class PrefsUtil(private val context: Context, private val prefs: SharedPreferenc
 
 
     fun subscription(value: Boolean? = null): Boolean {
-        //return  if(BuildConfig.DEBUG) true else bool(Constants.PREFS_SUBSCRIPTION, value)
-        return  bool(Constants.PREFS_SUBSCRIPTION, value)
+        //TODO
+        return  if(BuildConfig.DEBUG) true else bool(Constants.PREFS_SUBSCRIPTION, value)
+        //return  bool(Constants.PREFS_SUBSCRIPTION, value)
     }
 
 

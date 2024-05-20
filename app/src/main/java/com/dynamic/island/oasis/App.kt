@@ -30,6 +30,8 @@ import com.dynamic.island.oasis.data.UpdateManager
 import com.dynamic.island.oasis.data.repository.AppsRepository
 import com.dynamic.island.oasis.data.repository.PermissionsRepository
 import com.dynamic.island.oasis.data.repository.SettingsRepository
+import com.dynamic.island.oasis.dynamic_island.service.MainService
+import com.dynamic.island.oasis.dynamic_island.service.ServiceWrapper
 import com.dynamic.island.oasis.ui.dialogs.color_picker.ColorPickerViewModel
 import com.dynamic.island.oasis.ui.dialogs.rate.RateViewModel
 import com.dynamic.island.oasis.ui.splash.SplashActivity
@@ -44,6 +46,8 @@ import com.onesignal.OneSignal
 import com.onesignal.notifications.INotification
 import com.onesignal.notifications.INotificationClickEvent
 import com.onesignal.notifications.INotificationClickListener
+import com.onesignal.notifications.INotificationLifecycleListener
+import com.onesignal.notifications.INotificationWillDisplayEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,7 +79,7 @@ class App : Application() {
         single { MyConfig(androidContext()) }
         single { PrefsUtil(androidContext(), get()) }
         single { LockGuide() }
-        single { PermissionsUtil(androidContext(), get(), get(),get(),get(),get()) }
+        single { PermissionsUtil(androidContext(), get(), get(),get(),get()) }
         single { Gson() }
         single { NetworkUtil(get()) }
         single { UpdateManager(androidContext())}
@@ -108,6 +112,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MainService.init(this)
+        MainService.startViaWorker(this)
         startKoin()
         startOnesignal()
     }

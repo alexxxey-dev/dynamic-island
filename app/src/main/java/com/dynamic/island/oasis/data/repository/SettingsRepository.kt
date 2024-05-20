@@ -87,15 +87,7 @@ class SettingsRepository(
                 isPremium = true,
             )
         ).toMutableList()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            settings.add(
-                MySetting(
-                    id = Constants.SET_SCREENSHOT_APP,
-                    text = R.string.quick_action_screenshot,
-                    isPremium = true,
-                )
-            )
-        }
+
         return settings
 
     }

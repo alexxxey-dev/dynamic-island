@@ -1,14 +1,9 @@
 package com.dynamic.island.oasis.data.repository
 
-import com.dynamic.island.oasis.Constants
 import com.dynamic.island.oasis.R
-import com.dynamic.island.oasis.data.AppDatabase
-import com.dynamic.island.oasis.data.PrefsUtil
 import com.dynamic.island.oasis.data.models.MyPermission
 import com.dynamic.island.oasis.data.models.PermissionType
 import com.dynamic.island.oasis.util.PermissionsUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class PermissionsRepository(
     private val permissions: PermissionsUtil
@@ -23,8 +18,8 @@ class PermissionsRepository(
         val mList = mutableListOf(
             MyPermission(
                 id = 0,
-                text = R.string.accessibility_service,
-                type = PermissionType.ACSB
+                text = R.string.draw_overlay,
+                type = PermissionType.DRAW_OVERLAY
             ),
             MyPermission(
                 id = 1,

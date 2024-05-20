@@ -16,6 +16,8 @@ import com.dynamic.island.oasis.dynamic_island.util.DiParamsProvider
 import com.dynamic.island.oasis.util.PermissionsUtil
 import com.dynamic.island.oasis.data.PrefsUtil
 import com.dynamic.island.oasis.data.models.PermissionType
+import com.dynamic.island.oasis.dynamic_island.service.MainService
+import com.dynamic.island.oasis.dynamic_island.service.ServiceWrapper
 import com.dynamic.island.oasis.util.LockGuide
 import com.dynamic.island.oasis.util.SingleLiveEvent
 import com.dynamic.island.oasis.util.ext.analyticsEvent
@@ -40,6 +42,7 @@ class HomeViewModel(
     val diWidth = MutableLiveData<Int>()
     val diHeight = MutableLiveData<Int>()
     val diEnabled = MutableLiveData<Boolean>()
+
     val subscription = MutableLiveData<Boolean>()
     val sendBroadcast = SingleLiveEvent<Intent>()
     val showInterstitial = SingleLiveEvent<Unit>()
@@ -48,7 +51,6 @@ class HomeViewModel(
     val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             when (intent.action) {
-                Constants.ACTION_SEND_DI_STATE -> updateDiState(intent)
                 Constants.ACTION_SUBSCRIPTION_DEACTIVATED,Constants.ACTION_SUBSCRIPTION_ACTIVATED->loadSubscription()
             }
 
@@ -78,21 +80,17 @@ class HomeViewModel(
     }
 
     fun init() = viewModelScope.launch{
+
         val mDiParams = diParams.providePercent()
         diX.value = mDiParams.x
         diY.value = mDiParams.y
         diWidth.value = mDiParams.width
         diHeight.value = mDiParams.height
-
+        diEnabled.value = prefs.serviceEnabled()
         diNotch.value = prefs.isBackgroundNotch()
-
-
-        sendBroadcast.value = Intent(Constants.ACTION_GET_DI_STATE)
     }
 
-    private fun updateDiState(intent: Intent) {
-        diEnabled.value = intent.getBooleanExtra(Constants.PARAM_DI_STATE, false)
-    }
+
 
 
     fun setBackgroundNotch(view: View, notch: Boolean) {
@@ -155,13 +153,13 @@ class HomeViewModel(
     }
 
 
-    fun onStartStop(view: View) {
-        val mEnabled = (diEnabled.value ?: false)
+    fun checkCanStart(view: View) {
+        val mEnabled = prefs.serviceEnabled()
 
-        if (!permissions.isGranted(PermissionType.ACSB) && !mEnabled) {
+        if (!permissions.isGranted(PermissionType.DRAW_OVERLAY) && !mEnabled) {
             showDestinationBundle.value = Pair(
                 R.id.action_permissionDialog,
-                bundleOf(Constants.PARAM_PERMISSION_TYPE to PermissionType.ACSB)
+                bundleOf(Constants.PARAM_PERMISSION_TYPE to PermissionType.DRAW_OVERLAY)
             )
             return
         }
@@ -179,22 +177,23 @@ class HomeViewModel(
             return
         }
 
-        doStartStop(view)
+        startStop(view)
     }
 
-    fun doStartStop(view:View){
-        val newState = !(diEnabled.value ?: false)
-        val intent = Intent(Constants.ACTION_UPDATE_DI_STATE)
-            .putExtra(Constants.PARAM_DI_STATE, newState)
+
+    fun startStop(view:View){
+        val enabled = !prefs.serviceEnabled()
+        prefs.serviceEnabled(enabled)
         vibrator.doVibration(Constants.LONG_CLICK_VIBRATION)
-        if (newState) {
+        diEnabled.value = enabled
+
+        if (enabled) {
             view.context.analyticsEvent("on_start_clicked")
+            MainService.startViaWorker(view.context)
             showInterstitial.value = Unit
         } else {
+            MainService.stop(view.context)
             view.context.analyticsEvent("on_stop_clicked")
         }
-
-        diEnabled.value = newState
-        sendBroadcast.value = intent
     }
 }
